@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - إدارة المهام</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <h3>إدارة المهام</h3>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#current-tasks" class="active" data-text="عرض المهام الحالية"><i class="fas fa-clipboard-list"></i> <span class="nav-text">المهام الحالية</span></a></li>
+                    <li><a href="#add-task" data-text="إضافة مهمة جديدة"><i class="fas fa-plus-circle"></i> <span class="nav-text">إضافة مهمة</span></a></li>
+                    <li><a href="#completed-tasks" data-text="عرض المهام المكتملة"><i class="fas fa-check-circle"></i> <span class="nav-text">المهام المكتملة</span></a></li>
+                    <li><a href="#deleted-tasks" data-text="عرض المهام المحذوفة"><i class="fas fa-trash-alt"></i> <span class="nav-text">المهام المحذوفة</span></a></li>
+                    <li><a href="#statistics" data-text="عرض إحصائيات المهام"><i class="fas fa-chart-pie"></i> <span class="nav-text">إحصائيات</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile desktop-user-profile">
+                    <img src="https://images.icon-icons.com/2483/PNG/512/user_icon_149851.png" alt="صورة المستخدم" class="user-avatar" id="userAvatar">
+                    <div class="user-details">
+                        <span class="user-name">مستخدم تجريبي</span>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-menu-toggle" id="userMenuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                        <div class="user-menu-dropdown" id="userMenuDropdown">
+                            <a href="profile.html">الملف الشخصي</a>
+                            <a href="#" id="signOutLink">تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div id="customAlert" class="custom-alert" style="display: none;">
+                <span id="alertMessage"></span>
+            </div>
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="hamburger-menu" id="hamburgerMenu"><i class="fas fa-bars"></i></button>
+                    <h1 id="welcomeHeader">مرحباً بك!</h1>
+                </div>
+                <div class="header-right">
+                    <div class="theme-toggle-header">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="checkbox" id="theme-checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <section class="task-section" id="current-tasks-section">
+                <h2>المهام الحالية</h2>
+                <div class="task-list" id="currentTaskList">
+                    <p class="no-tasks">لا توجد مهام حالية لعرضها.</p>
+                </div>
+            </section>
+
+            <section class="add-task-section task-section" id="add-task-section" style="display: none;">
+                <h2>إضافة مهمة جديدة</h2>
+                <form id="addTaskForm" class="add-task-form">
+                    <div class="input-group">
+                        <label for="taskName">اسم المهمة <span class="required">*</span></label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-tasks icon-right"></i>
+                            <input type="text" id="taskName" name="taskName" placeholder="ادخل اسم المهمة" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="taskDetails">تفاصيل المهمة</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-info-circle icon-right"></i>
+                            <textarea id="taskDetails" name="taskDetails" rows="3" placeholder="أضف تفاصيل إضافية للمهمة"></textarea>
+                        </div>
+                    </div>
+                    <div class="input-group-row">
+                        <div class="input-group">
+                            <label for="taskStartDate">تاريخ البداية</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-alt icon-right"></i>
+                                <input type="date" id="taskStartDate" name="taskStartDate">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="taskEndDate">تاريخ النهاية</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-alt icon-right"></i>
+                                <input type="date" id="taskEndDate" name="taskEndDate">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="taskTime">وقت المهمة (اختياري)</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-clock icon-right"></i>
+                                <input type="time" id="taskTime" name="taskTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="taskNotes">ملاحظات</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-sticky-note icon-right"></i>
+                            <textarea id="taskNotes" name="taskNotes" rows="2" placeholder="أضف أي ملاحظات هنا"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn primary">إضافة مهمة</button>
+                </form>
+            </section>
+
+            <section class="task-section" id="completed-tasks-section" style="display: none;">
+                <h2>المهام المكتملة</h2>
+                <div class="task-list" id="completedTaskList">
+                    <p class="no-tasks">لا توجد مهام مكتملة بعد. أكمل بعض المهام لترى قائمتك هنا!</p>
+                </div>
+            </section>
+
+            <section class="task-section" id="deleted-tasks-section" style="display: none;">
+                <h2>المهام المحذوفة</h2>
+                <div class="task-list" id="deletedTaskList">
+                    <p class="no-tasks">لا توجد مهام محذوفة. المهام المحذوفة ستظهر هنا.</p>
+                </div>
+            </section>
+
+
+            <section class="statistics-section task-section" id="statistics-section" style="display: none;">
+                <h2>إحصائيات التقدم</h2>
+                <div class="summary-cards-grid" id="summaryCards">
+                    <div class="summary-card">
+                        <i class="fas fa-list-ul"></i>
+                        <div>
+                            <p>إجمالي المهام</p>
+                            <span id="totalTasksCount">0</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-clipboard-list"></i>
+                        <div>
+                            <p>المهام الحالية</p>
+                            <span id="currentTasksCount">0</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <p>المهام المكتملة</p>
+                            <span id="completedTasksCount">0</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-trash-alt"></i>
+                        <div>
+                            <p>المهام المحذوفة</p>
+                            <span id="deletedTasksCount">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="statistics-grid">
+                    <div class="chart-container">
+                        <h3>حالة المهام</h3>
+                        <canvas id="taskStatusChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>إجمالي المهام</h3>
+                        <canvas id="taskCountsChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>المهام حسب الشهر</h3>
+                        <canvas id="tasksByMonthChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>المهام المكتملة بمرور الوقت</h3>
+                        <canvas id="completedTasksOverTimeChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <div id="editTaskModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>تعديل المهمة</h3>
+                <form id="editTaskForm" class="add-task-form">
+                    <div class="modal-placeholder">
+                        <p>تحميل...</p>
+                    </div>
+                    <input type="hidden" id="editTaskId">
+                    <div class="input-group">
+                        <label for="editTaskName">اسم المهمة <span class="required">*</span></label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-tasks icon-right"></i>
+                            <input type="text" id="editTaskName" name="editTaskName" placeholder="ادخل اسم المهمة" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="editTaskDetails">تفاصيل المهمة</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-info-circle icon-right"></i>
+                            <textarea id="editTaskDetails" name="editTaskDetails" rows="3" placeholder="أضف تفاصيل إضافية للمهمة"></textarea>
+                        </div>
+                    </div>
+                    <div class="input-group-row">
+                        <div class="input-group">
+                            <label for="editTaskStartDate">تاريخ البداية</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-alt icon-right"></i>
+                                <input type="date" id="editTaskStartDate" name="editTaskStartDate">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="editTaskEndDate">تاريخ النهاية</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-alt icon-right"></i>
+                                <input type="date" id="editTaskEndDate" name="editTaskEndDate">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="editTaskTime">وقت المهمة (اختياري)</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-clock icon-right"></i>
+                                <input type="time" id="editTaskTime" name="editTaskTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="editTaskNotes">ملاحظات</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-sticky-note icon-right"></i>
+                            <textarea id="editTaskNotes" name="editTaskNotes" rows="2" placeholder="أضف أي ملاحظات هنا"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">حفظ التغييرات</button>
+                        <button type="button" class="btn secondary" id="cancelEdit">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="deleteConfirmModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>تأكيد الحذف</h3>
+                <p>هل أنت متأكد أنك تريد حذف هذه المهمة؟</p>
+                <div class="form-actions">
+                    <button type="button" class="btn primary" id="confirmDelete">حذف</button>
+                    <button type="button" class="btn secondary" id="cancelDelete">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="#current-tasks" class="mobile-nav-link">المهام الحالية</a></li>
+            <li><a href="#add-task" class="mobile-nav-link">إضافة مهمة</a></li>
+            <li><a href="#completed-tasks" class="mobile-nav-link">المهام المكتملة</a></li>
+            <li><a href="#deleted-tasks" class="mobile-nav-link">المهام المحذوفة</a></li>
+            <li><a href="#statistics" class="mobile-nav-link">إحصائيات</a></li>
+        </ul>
+        <div class="user-profile mobile-user-profile">
+            <img src="https://images.icon-icons.com/2483/PNG/512/user_icon_149851.png" alt="صورة المستخدم" class="user-avatar" id="mobileUserAvatar">
+            <div class="user-details">
+                <span class="user-name">مستخدم تجريبي</span>
+            </div>
+            <div class="user-menu">
+                <button class="user-menu-toggle" id="mobileUserMenuToggle"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="user-menu-dropdown" id="mobileUserMenuDropdown">
+                    <a href="profile.html">الملف الشخصي</a>
+                    <a href="#" id="mobileSignOutLink">تسجيل الخروج</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <script src="js/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

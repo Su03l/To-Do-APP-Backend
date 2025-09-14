@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - إدارة المهام</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="customAlert" class="custom-alert" style="display: none;">
+        <span id="alertMessage"></span>
+    </div>
+    <div class="profile-container">
+        <aside class="profile-sidebar">
+            <a href="dashboard.html" class="back-to-dashboard">
+                <i class="fas fa-arrow-right"></i>
+                <span>العودة إلى لوحة التحكم</span>
+            </a>
+            <nav class="profile-nav">
+                <ul>
+                    <li><a href="#profile" class="active"><i class="fas fa-user"></i> <span>الملف الشخصي</span></a></li>
+                    <li><a href="#password"><i class="fas fa-lock"></i> <span>تغيير كلمة المرور</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="profile-main">
+            <section id="profile-section" class="profile-section active">
+                <div class="profile-header">
+                    <h1>الملف الشخصي</h1>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-avatar-section">
+                        <div class="avatar-container">
+                            <img src="https://images.icon-icons.com/2483/PNG/512/user_icon_149851.png" alt="صورة المستخدم" class="profile-avatar" id="profileAvatar">
+                            <input type="file" id="avatarUpload" hidden accept="image/png,image/jpeg,image/jpg,image/gif" capture="user">
+                            <div class="avatar-actions">
+                                <button class="btn-icon" id="showAvatarBtn" title="عرض الصورة"><i class="fas fa-eye"></i></button>
+                                <button class="btn-icon" id="updateAvatarBtn" title="تحديث الصورة"><i class="fas fa-camera"></i></button>
+                                <button class="btn-icon" id="deleteAvatarBtn" title="حذف الصورة"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-form-section">
+                        <form id="profileForm" class="profile-form">
+                            <div class="input-group-row">
+                                <div class="input-group">
+                                    <label for="firstName">الاسم الأول</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-user icon-right"></i>
+                                        <input type="text" id="firstName" name="firstName" value="مستخدم">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="lastName">اسم العائلة</label>
+                                    <div class="input-with-icon">
+                                        <i class="fas fa-user icon-right"></i>
+                                        <input type="text" id="lastName" name="lastName" value="تجريبي">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="username">اسم المستخدم</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-at icon-right"></i>
+                                    <input type="text" id="username" name="username" value="user_test">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">البريد الإلكتروني</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-envelope icon-right"></i>
+                                    <input type="email" id="email" name="email" value="user@example.com">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="phone">رقم الهاتف</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-phone icon-right"></i>
+                                    <input type="tel" id="phone" name="phone" value="+1234567890">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn primary">حفظ التغييرات</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="password-section" class="profile-section">
+                <div class="profile-header">
+                    <h1>تغيير كلمة المرور</h1>
+                </div>
+                <div class="profile-content">
+                    <form id="passwordForm" class="profile-form">
+                        <div class="input-group">
+                            <label for="currentPassword">كلمة المرور الحالية</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock icon-right"></i>
+                                <input type="password" id="currentPassword" name="currentPassword">
+                                <i class="fas fa-eye-slash toggle-password icon-left"></i>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="newPassword">كلمة المرور الجديدة</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock icon-right"></i>
+                                <input type="password" id="newPassword" name="newPassword">
+                                <i class="fas fa-eye-slash toggle-password icon-left"></i>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="confirmPassword">تأكيد كلمة المرور الجديدة</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock icon-right"></i>
+                                <input type="password" id="confirmPassword" name="confirmPassword">
+                                <i class="fas fa-eye-slash toggle-password icon-left"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary">تغيير كلمة المرور</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="avatarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img src="" class="modal-avatar" alt="صورة المستخدم">
+            <div class="modal-actions">
+                <button class="btn primary" id="modalUpdateBtn">تحديث</button>
+                <button class="btn danger" id="modalDeleteBtn">حذف</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

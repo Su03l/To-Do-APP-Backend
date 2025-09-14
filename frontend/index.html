@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المهام - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#">إدارة المهام</a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#features" class="nav-link">المميزات</a></li>
+                    <li><a href="#about" class="nav-link">عن الموقع</a></li>
+                    <li><a href="#contact" class="nav-link">تواصل معنا</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn secondary nav-btn">تسجيل دخول</a>
+                    <a href="register.html" class="btn primary nav-btn">إنشاء حساب</a>
+                </div>
+                <div class="profile-section hidden">
+                    <img src="https://via.placeholder.com/30" alt="Profile Picture" class="profile-pic">
+                    <div class="profile-dropdown-toggle">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <div class="profile-dropdown-menu">
+                            <a href="profile.html">الملف الشخصي</a>
+                            <a href="#" id="logout-btn">تسجيل خروج</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="toggle-switch">
+                <label class="switch-label">
+                    <input type="checkbox" class="checkbox" id="theme-checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="#features" class="mobile-nav-link">المميزات</a></li>
+            <li><a href="#about" class="mobile-nav-link">عن الموقع</a></li>
+            <li><a href="#contact" class="mobile-nav-link">تواصل معنا</a></li>
+            <li><a href="login.html" class="btn secondary mobile-nav-btn">تسجيل دخول</a></li>
+            <li><a href="register.html" class="btn primary mobile-nav-btn">إنشاء حساب</a></li>
+        </ul>
+        <div class="mobile-profile-section hidden">
+            <img src="https://via.placeholder.com/30" alt="Profile Picture" class="profile-pic">
+            <div class="mobile-profile-dropdown-toggle">
+                <i class="fas fa-ellipsis-v"></i>
+                <div class="mobile-profile-dropdown-menu">
+                    <a href="profile.html">الملف الشخصي</a>
+                    <a href="#" id="mobile-logout-btn">تسجيل خروج</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>نظم حياتك، أنجز مهامك بكفاءة</h1>
+                <p>أفضل طريقة لتتبع مهامك اليومية، مشاريعك، وأهدافك الشخصية.</p>
+                <div class="hero-buttons">
+                    <a href="register.html" class="btn primary large">ابدأ الآن <i class="fas fa-arrow-left"></i></a>
+                    <a href="login.html" class="btn secondary large">تسجيل دخول</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://raitotec.com/public/attachments/blog/1729059977678.png" alt="إدارة المهام">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>مميزاتنا</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-list-check"></i>
+                    <h3>إدارة المهام بسهولة</h3>
+                    <p>أضف، عدّل، واحذف مهامك بكل يسر. تتبع تقدمك وابقَ منظمًا.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>متابعة الإنجاز</h3>
+                    <p>شاهد إحصائيات واضحة عن مهامك المكتملة والمعلقة لتبقى متحفزًا.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>تذكيرات ذكية</h3>
+                    <p>لا تفوت أي موعد مهم مع تذكيرات قابلة للتخصيص لجميع مهامك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>عن الموقع</h2>
+                <p>موقع "إدارة المهام" هو رفيقك الأمثل لتنظيم حياتك اليومية والمهنية. نؤمن بأن التنظيم هو مفتاح النجاح، وقد صممنا هذا الموقع لمساعدتك على تحقيق أقصى استفادة من وقتك وجهدك.</p>
+                <p>هدفنا هو توفير أداة بسيطة وفعالة تمكنك من التركيز على ما يهم حقًا، وتقليل التوتر الناتج عن المهام المتراكمة.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://datatime4it.com/wp-content/uploads/2023/02/%D9%86%D8%B8%D8%A7%D9%85-%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D9%85%D9%87%D8%A7%D9%85-%D9%84%D9%84%D9%85%D8%A4%D8%B3%D8%B3%D8%A7%D8%AA.jpg.webp" alt="عن الموقع">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>تواصل معنا</h2>
+            <p>لأي استفسارات أو دعم، لا تتردد في التواصل معنا.</p>
+            <div class="contact-content-wrapper">
+                <div class="contact-info-card">
+                    <p><i class="fas fa-envelope"></i> info@taskmanager.com</p>
+                    <p><i class="fas fa-phone"></i> <span style="direction: ltr; unicode-bidi: embed;">+966 50 123 4567</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> KSA Al-Madina AL-Monwara</p>
+                </div>
+                <div class="social-links-card">
+                    <h3>تابعنا على</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section about-company">
+                <h3>إدارة المهام</h3>
+                <p>رفيقك الأمثل لتنظيم حياتك اليومية والمهنية. نؤمن بأن التنظيم هو مفتاح النجاح.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section quick-links">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#about">عن الموقع</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                    <li><a href="login.html">تسجيل دخول</a></li>
+                    <li><a href="register.html">إنشاء حساب</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact-info-footer">
+                <h3>تواصل معنا</h3>
+                <p><i class="fas fa-envelope"></i> info@taskmanager.com</p>
+                <p><i class="fas fa-phone"></i> <span style="direction: ltr; unicode-bidi: embed;">+966 50 123 4567</span></p>
+                <p><i class="fas fa-map-marker-alt"></i> KSA Al-Madina AL-Monwara</p>
+            </div>
+
+            <div class="footer-section legal-info">
+                <h3>معلومات قانونية</h3>
+                <ul>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الخدمة</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 إدارة المهام. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

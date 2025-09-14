@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="loader" class="loader-container" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    <div id="customAlert" class="custom-alert" style="display: none;">
+        <span id="alertMessage"></span>
+    </div>
+    <div class="register-container">
+        <div class="top-bar">
+            <a href="index.html" class="back-arrow"><i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="register-box">
+            <h2>إنشاء حساب جديد</h2>
+            <form id="registerForm">
+                <div class="input-group-row">
+                    <div class="input-group">
+                        <label for="firstName">الاسم الأول</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user icon-right"></i>
+                            <input type="text" id="firstName" name="firstName" placeholder="ادخل اسمك الأول" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastName">الاسم الأخير</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user icon-right"></i>
+                            <input type="text" id="lastName" name="lastName" placeholder="ادخل اسمك الأخير" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="username">اسم المستخدم</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-at icon-right"></i>
+                        <input type="text" id="username" name="username" placeholder="ادخل اسم المستخدم" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope icon-right"></i>
+                        <input type="email" id="email" name="email" placeholder="ادخل بريدك الإلكتروني" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="phone">رقم الجوال</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone icon-right"></i>
+                        <input type="tel" id="phone" name="phone" placeholder="050 123 4567" pattern="05[0-9]{8}" maxlength="10" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="password">كلمة المرور</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock icon-right"></i>
+                        <input type="password" id="password" name="password" placeholder="ادخل كلمة المرور" required>
+                        <span class="toggle-password icon-left" id="togglePassword"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock icon-right"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="أكد كلمة المرور" required>
+                        <span class="toggle-password icon-left" id="toggleConfirmPassword"><i class="fas fa-eye"></i></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn primary">إنشاء حساب</button>
+            </form>
+            <p class="switch-link">عندك حساب؟ <a href="login.html">سجل دخول</a></p>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>

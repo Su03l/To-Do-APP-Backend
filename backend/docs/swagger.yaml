@@ -1,0 +1,549 @@
+openapi: 3.0.0
+info:
+  title: To-Do List Backend API
+  version: 1.0.0
+  description: API documentation for the To-Do List Backend, including user authentication and task management.
+servers:
+  - url: http://localhost:5000/api
+    description: Development server
+tags:
+  - name: Auth
+    description: User authentication management
+  - name: Users
+    description: User management operations
+  - name: Tasks
+    description: To-Do Task management
+paths:
+  /auth/signup:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - first_name
+                - last_name
+                - username
+                - email
+                - password
+              properties:
+                first_name:
+                  type: string
+                  description: The user's first name.
+                last_name:
+                  type: string
+                  description: The user's last name.
+                username:
+                  type: string
+                  description: The user's chosen username.
+                email:
+                  type: string
+                  format: email
+                  description: The user's email address.
+                mobile_number:
+                  type: string
+                  description: The user's mobile number.
+                password:
+                  type: string
+                  format: password
+                  description: The user's password (min 6 characters).
+      responses:
+        201:
+          description: User registered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        400:
+          description: User already exists or invalid input.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        500:
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /auth/signin:
+    post:
+      summary: Authenticate user and get a token
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+                - password
+              properties:
+                identifier:
+                  type: string
+                  description: User's email or username.
+                password:
+                  type: string
+                  format: password
+                  description: The user's password.
+      responses:
+        200:
+          description: User logged in successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        400:
+          description: Invalid credentials.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        500:
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /tasks:
+    get:
+      summary: Get all tasks for the authenticated user
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A list of tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+    post:
+      summary: Create a new task
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        201:
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+  /tasks/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The task ID
+    get:
+      summary: Get a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Task details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        401:
+          description: Unauthorized
+        404:
+          description: Task not found
+        500:
+          description: Server error
+    put:
+      summary: Update a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        200:
+          description: Task updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        404:
+          description: Task not found
+        500:
+          description: Server error
+    patch:
+      summary: Partially update a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        200:
+          description: Task partially updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        404:
+          description: Task not found
+        500:
+          description: Server error
+    delete:
+      summary: Delete a task by ID
+      tags: [Tasks]
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Task deleted successfully.
+        401:
+          description: Unauthorized
+        404:
+          description: Task not found
+        500:
+          description: Server error
+  /users:
+    get:
+      summary: Get all users
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+    post:
+      summary: Create a new user
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        201:
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        500:
+          description: Server error
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      summary: Get a user by ID
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: User details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+        500:
+          description: Server error
+    put:
+      summary: Update a user by ID
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: User updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+        500:
+          description: Server error
+    patch:
+      summary: Partially update a user by ID
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        200:
+          description: User partially updated successfully.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid input
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+        500:
+          description: Server error
+    delete:
+      summary: Delete a user by ID
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: User deleted successfully.
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+        500:
+          description: Server error
+  /users/{id}/upload-avatar:
+    post:
+      summary: Upload a profile avatar for a user
+      tags: [Users]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The user ID
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+                  description: The image file to upload (max 10MB, jpeg, jpg, png, gif)
+      responses:
+        200:
+          description: Profile image uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid input or no file provided.
+        401:
+          description: Unauthorized
+        404:
+          description: User not found
+        500:
+          description: Server error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+        first_name:
+          type: string
+          description: User's first name
+        last_name:
+          type: string
+          description: User's last name
+        username:
+          type: string
+          description: User's username
+        email:
+          type: string
+          format: email
+          description: User's email
+        mobile_number:
+          type: string
+          description: User's mobile number
+        profile_image_url:
+          type: string
+          description: URL of the user's profile image
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of creation
+    UserInput:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - username
+        - email
+        - password
+      properties:
+        first_name:
+          type: string
+          description: The user's first name.
+        last_name:
+          type: string
+          description: The user's last name.
+        username:
+          type: string
+          description: The user's chosen username.
+        email:
+          type: string
+          format: email
+          description: The user's email address.
+        mobile_number:
+          type: string
+          description: The user's mobile number.
+        password:
+          type: string
+          format: password
+          description: The user's password (min 6 characters).
+    AuthResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A message indicating the result of the operation.
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+          description: JWT for authentication.
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Task ID
+        title:
+          type: string
+          description: Title of the task
+        description:
+          type: string
+          description: Description of the task
+        completed:
+          type: boolean
+          description: Whether the task is completed
+        user_id:
+          type: string
+          description: ID of the user who owns the task
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+    TaskInput:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          description: Title of the task
+        description:
+          type: string
+          description: Description of the task
+        completed:
+          type: boolean
+          description: Whether the task is completed
